@@ -1,9 +1,10 @@
 const http = require('request-promise');
 const fs = require('fs-extra');
 const dateformat = require('dateformat');
+const md5 = require('md5');
 
 const url = process.argv[2];
-const dir = process.argv[3];
+const dir = process.argv[3] || 'dest';
 const interval = process.argv[4] || 1;
 
 if (!url || !dir) {
@@ -22,7 +23,8 @@ function utcDate() {
 function store() {
   http.get(url).then(pgn => {
     const file = `${dir}/${utcDate()}.pgn`;
-    console.log(`+ ${file}`);
+    const games = (pgn.match(/\[Event /g) || []).length;
+    console.log(`+ ${file} games:${games} md5:${md5(pgn)} size:${pgn.length}`);
     return fs.writeFile(file, pgn);
   }).then(scheduleStore)
     .catch(err => {
