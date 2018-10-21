@@ -20,12 +20,18 @@ function utcDate() {
   return dateformat(Date.now(), 'yyyy-mm-dd_HH:MM:ss', true);
 }
 
+let lastHash = '';
+
 function store() {
   http.get(url).then(pgn => {
     const file = `${dir}/${utcDate()}.pgn`;
     const games = (pgn.match(/\[Event /g) || []).length;
-    console.log(`+ ${file} games:${games} md5:${md5(pgn)} size:${pgn.length}`);
-    return fs.writeFile(file, pgn);
+    const hash = md5(pgn);
+    if (hash != lastHash) {
+      lastHash = hash;
+      console.log(`+ ${file} games:${games} md5:${hash} size:${pgn.length}`);
+      return fs.writeFile(file, pgn);
+    }
   }).then(scheduleStore)
     .catch(err => {
       console.log('Error! ' + err);
