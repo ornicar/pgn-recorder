@@ -10,9 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "dateformat": "^2.0.0",
+    "express": "^4.16.3",
     "fs-extra": "^3.0.1",
     "md5": "^2.2.1",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "request": "^2.88",
+    "request-promise": "^4.2.1",
+    "nodemon": "^1.18.4"
   }
 }
