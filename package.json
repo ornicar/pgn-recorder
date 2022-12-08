@@ -13,7 +13,7 @@
     "express": "^4.17.3",
     "fs-extra": "^3.0.1",
     "md5": "^2.2.1",
-    "nodemon": "^1.19.1",
+    "nodemon": "^2.0.20",
     "request": "^2.88",
     "request-promise": "^4.2.4"
   }
