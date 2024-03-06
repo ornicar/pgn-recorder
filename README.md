@@ -2,8 +2,20 @@
 
 ## Usage
 
+### Record a PGN source
+
 ```
-npm run record data/ictp2022 https://1.pool.livechesscloud.com/get/73fff8af-cc10-4c42-a5b0-83d7f2827f3f/round-5/index.json 1
+pnpm record data/shenzhen http://zhibo.zhisai.net/DA/rounds/round-4/games.pgn 5
 ```
 
-will hit that URL every second and store the content to data/ictp2022 only when it changes.
+Hits that URL every 5 seconds and store the content to data/shenzhen only when it changes.
+
+### Replay a PGN source
+
+```sh
+pnpm replay data/shenzhen
+```
+
+Opens an HTTP server on port 6399 and serves the files recorded in data/shenzhen.
+Each hit to http://localhost:6399/ will serve the next file in the directory.
+When the last file is served, the server will stop.
